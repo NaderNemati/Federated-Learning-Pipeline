@@ -17,8 +17,8 @@ This repository implements a Federated Learning pipeline using Flower and PyTorc
 </div>
 
 ## Project Structure
-
-Federated-Learning-Pipeline/
+### Federated-Learning-Pipeline
+```python
   ├── client.py        # Client-side code for federated learning with Flower
   ├── dataset.py       # Dataset loading, partitioning, and distribution
   ├── main.py          # Main entry point for running the simulation
