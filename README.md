@@ -124,3 +124,6 @@ config_fit:
   momentum: 0.9
   local_epochs: 1
 ```
+
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
