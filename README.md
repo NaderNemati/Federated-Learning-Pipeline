@@ -57,3 +57,21 @@ Federated-Learning-Pipeline/
   ├── README.md        # Project documentation (you're here!)
   ├── LICENSE          # License file
   └── conf/            # Configuration files for the simulation (base.yaml)
+```
+
+
+## Installation
+
+### Prerequisites
+
+- Python 3.9 or later
+- [Flower](https://flower.dev/)
+- [PyTorch](https://pytorch.org/)
+
+### Install Dependencies
+
+You can install the required dependencies by running the following command:
+
+```bash
+pip install -r requirements.txt
+```
