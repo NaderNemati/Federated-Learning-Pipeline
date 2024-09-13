@@ -100,6 +100,6 @@ python main.py
 
 This command orchestrates the federated learning process by:
 
-* *Loading and partitioning the MNIST dataset using dataset.py
-* *Running the federated simulation with client-side logic in client.py and server-side logic in server.py
-* *Training a CNN model defined in model.py on the partitioned dataset.
+* Loading and partitioning the MNIST dataset using dataset.py
+* Running the federated simulation with client-side logic in client.py and server-side logic in server.py
+* Training a CNN model defined in model.py on the partitioned dataset.
