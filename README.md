@@ -75,3 +75,31 @@ You can install the required dependencies by running the following command:
 ```bash
 pip install -r requirements.txt
 ```
+
+
+## Usage
+### Running the Federated Learning Simulation
+Clone the repository:
+
+```bash
+git clone https://github.com/NaderNemati/Federated-Learning-Pipeline.git
+cd Federated-Learning-Pipeline
+```
+
+Install dependencies: Make sure the virtual environment is activated if you use one, and run:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run the simulation: To start the federated learning simulation, run the main.py script:
+
+```bash
+python main.py
+```
+
+This command orchestrates the federated learning process by:
+
+* **Loading and partitioning the MNIST dataset using dataset.py**
+* **Running the federated simulation with client-side logic in client.py and server-side logic in server.py**
+* **Training a CNN model defined in model.py on the partitioned dataset.**
