@@ -34,9 +34,10 @@ This repository implements a Federated Learning pipeline using Flower and PyTorc
 
 ## Federated Learning Pipeline on MNIST Dataset
 
-This repository implements a Federated Learning pipeline using the Flower framework, where multiple clients collaboratively train a model on the MNIST dataset for image classification.
+This repository implements a Federated Learning pipeline using the Flower framework, where multiple clients collaboratively train a model on the MNIST dataset for image classification. Clients train on their local data partitions without sharing raw data, preserving privacy.
 
 ## Table of Contents
+
 - [Overview](#overview)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -47,26 +48,24 @@ This repository implements a Federated Learning pipeline using the Flower framew
 ## Overview
 
 In this project, we implement a simple Federated Learning pipeline for image classification using the MNIST dataset. The pipeline includes:
-- A `client.py` file, which defines the Flower client to handle local training on MNIST data.
-- A `server.py` file, defining server-side configurations for federated learning rounds.
-- A `dataset.py` file for partitioning the MNIST dataset among clients.
-- A `model.py` file, defining a simple Convolutional Neural Network (CNN) model for classification.
-- A `main.py` file to orchestrate the federated learning simulation using Flower.
+
+  - **`client.py`:** Defines the Flower client to handle local training on partitioned MNIST data for each client.
+  - **`server.py`:** Defines server-side configurations for managing communication rounds, model aggregation, and global model updates.
+  - **`dataset.py`:** Handles loading the MNIST dataset, strategically partitioning it among clients (e.g., IID or non-IID), and ensures no raw data is exchanged.
+  - **`model.py`:** Defines a simple Convolutional Neural Network (CNN) model for image classification.
+  - **`main.py`:** Orchestrates the federated learning simulation using Flower, coordinating communication between clients and the server.
 
 ## Installation
 
 ### Prerequisites
+
 - Python 3.9 or later
 - [Flower](https://flower.dev/)
 - [PyTorch](https://pytorch.org/)
 
-### Install dependencies
+### Install Dependencies
 
 You can install the required dependencies by running the following command:
 
 ```bash
 pip install -r requirements.txt
-
-    └── base.yaml    # Configuration files for the simulation
-
-
