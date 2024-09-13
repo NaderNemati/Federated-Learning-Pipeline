@@ -27,7 +27,7 @@ Federated-Learning-Pipeline/
 ├── README.md         # Documentation for the project
 ├── LICENSE           # License file
 └── conf/             # Configuration files for the simulation (base.yaml)
-
+```bash
 
 ## Federated Learning Pipeline on MNIST Dataset
 
@@ -53,13 +53,15 @@ In this project, we implement a simple Federated Learning pipeline for image cla
 ## Installation
 
 ### Prerequisites
+```bash
 - Python 3.9 or later
 - [Flower](https://flower.dev/)
 - [PyTorch](https://pytorch.org/)
-
+```bash
 ### Install dependencies
 
 You can install the required dependencies by running the following command:
 
 ```bash
 pip install -r requirements.txt
+```bash
