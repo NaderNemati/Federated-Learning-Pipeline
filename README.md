@@ -57,6 +57,7 @@ Federated-Learning-Pipeline/
   ├── README.md        # Project documentation (you're here!)
   ├── LICENSE          # License file
   └── conf/            # Configuration files for the simulation (base.yaml)
+    └── base.yaml
 ```
 
 
