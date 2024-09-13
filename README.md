@@ -4,17 +4,15 @@ Federated Learning pipeline using Flower and PyTorch
 
 ## Project Structure
 
-The project is organized into the following directories:
-
-- **client.py:** Handles local training on MNIST data partitions for each client.
-- **dataset.py:** Partitions the MNIST dataset among clients.
-- **main.py:** Orchestrates the federated learning simulation using Flower.
-- **model.py:** Defines the CNN model for image classification.
-- **server.py:** Defines server-side configurations for federated learning rounds.
-- **conf/base.yaml:** Contains configuration options for the simulation (default configuration file).
-- **requirements.txt:** Lists the required dependencies for the project.
-- **README.md:** Provides documentation for the project (you're currently reading it!).
-- **LICENSE:** Specifies the project's licensing information.
+<div align="center">
+<table border=0 style="border: 1.2px solid #c6c6c6 !important; border-spacing: 2px; width: auto !important;">
+  <tr><td valign=top style="border: 1.2px solid #c6c6c6 !important; padding: 2px !important;">
+    <a href="https://github.com/NaderNemati/Federated-Learning-Pipeline" target="_blank">
+      <div align=center valign=top><img src="https://raw.githubusercontent.com/NaderNemati/Federated-Learning-Pipeline/main/path/to/your/image.png" alt="Project Structure" style="margin: 0px !important; height: 200px !important;">
+        <p>Project Structure</p>
+      </div>
+    </a>
+  </td></tr></table></div>
 
 
 
