@@ -1,6 +1,7 @@
 # Federated-Learning-Pipeline
 Federated Learning pipeline using Flower and PyTorch
 
+
 Federated-Learning-Pipeline/
 │
 ├── client.py         # Client-side code for federated learning
