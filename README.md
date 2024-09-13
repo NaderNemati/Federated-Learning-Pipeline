@@ -8,18 +8,16 @@ Federated Learning pipeline using Flower and PyTorch
 <table border=0 style="border: 1.2px solid #c6c6c6 !important; border-spacing: 2px; width: auto !important;">
   <tr><td valign=top style="border: 1.2px solid #c6c6c6 !important; padding: 2px !important;">
     <a href="https://github.com/NaderNemati/Federated-Learning-Pipeline" target="_blank">
-      <div align=center valign=top><img src="https://raw.githubusercontent.com/NaderNemati/Federated-Learning-Pipeline/main/path/to/your/image.png" alt="Project Structure" style="margin: 0px !important; height: 200px !important;">
+      <div align=center valign=top><img src="https://raw.githubusercontent.com/NaderNemati/Federated-Learning-Pipeline/main/images/federated_learning_pipeline.png" alt="Project Structure" style="margin: 0px !important; height: 200px !important;">
         <p>Project Structure</p>
       </div>
     </a>
-  </td></tr></table></div>
+  </td></tr></table>
+</div>
 
 
 
-
-
-
-# Federated Learning Pipeline on MNIST Dataset
+## Federated Learning Pipeline on MNIST Dataset
 
 This repository implements a Federated Learning pipeline using the Flower framework, where multiple clients collaboratively train a model on the MNIST dataset for image classification.
 
@@ -52,4 +50,4 @@ In this project, we implement a simple Federated Learning pipeline for image cla
 You can install the required dependencies by running the following command:
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt 1
