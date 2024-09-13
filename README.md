@@ -22,9 +22,9 @@ This repository implements a Federated Learning pipeline using the Flower framew
 ## Table of Contents
 
 - [Overview](#overview)
+- [Project Structure](#project-structure)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Project Structure](#project-structure)
 - [Performance Summary and Analysis](#Performance-Summary-and-Analysis)
 - [License](#license)
 
