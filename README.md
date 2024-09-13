@@ -18,13 +18,14 @@ This repository implements a Federated Learning pipeline using Flower and PyTorc
 
 ## Project Structure (Detailed)
 
+```python
 Federated-Learning-Pipeline/
-├── client.py            # Client-side code for federated learning with Flower
-├── dataset.py           # Dataset loading, partitioning, and distribution
-├── main.py              # Main entry point for running the simulation
-├── model.py             # Model definition (CNN for MNIST)
-├── server.py            # Server-side federated learning configuration
-├── requirements.txt      # Dependencies to run the code
-├── README.md            # Project documentation (you're here!)
-├── LICENSE               # License file
-└── conf/                 # Configuration files for the simulation (base.yaml)
+  ├── client.py        # Client-side code for federated learning with Flower
+  ├── dataset.py       # Dataset loading, partitioning, and distribution
+  ├── main.py          # Main entry point for running the simulation
+  ├── model.py         # Model definition (CNN for MNIST)
+  ├── server.py        # Server-side federated learning configuration
+  ├── requirements.txt # Dependencies to run the code
+  ├── README.md        # Project documentation (you're here!)
+  ├── LICENSE          # License file
+  └── conf/            # Configuration files for the simulation (base.yaml)
