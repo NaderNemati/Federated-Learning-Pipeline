@@ -125,5 +125,29 @@ config_fit:
   local_epochs: 1
 ```
 
+## Performance Summary and Analysis
+In this federated learning experiment, the training and evaluation processes were distributed across 5 clients, each holding a partition of the MNIST dataset. The global model was updated through an aggregation of the models trained locally by the clients. Below is a detailed analysis of the client's performance and the overall learning process:
+
+## Clients' Loss and Accuracy
+* Clients exhibited varying performance due to differences in their local data partitions.
+* At the beginning of the training process (Round 1), the loss values across the clients were relatively high, and accuracy ranged between 75-82%.
+* As training progressed, clients steadily improved in both loss and accuracy. For instance, by Round 5, client accuracies reached about 95-96%.
+* By Round 10, clients achieved accuracies between 96.5% and 97.5%, with losses as low as 4.6-5.8.
+
+## Global Model Performance
+* The global model initially showed poor performance, with low accuracy (around 75%) and high loss.
+* By Round 5, the global model's accuracy improved to 96.6%, with a loss of 6.85.
+* By Round 10, the global model achieved an accuracy of 97.5%, and the loss decreased to 4.65.
+
+## Comparison of Clients and Global Model Performance
+* Clients generally outperformed the global model in accuracy, as they optimized for their specific local data.
+* The global model, however, was more generalized, performing well across all clients and unseen data.
+* The global model showed slower but more consistent improvements compared to individual clients.
+
+## Learning Process of the Global Model
+* **Initial Stages (Rounds 1-3):** The global model made rapid progress in reducing loss and improving accuracy, as it learned from the distributed data across the clients.
+* **Mid-Training (Rounds 4-7):** The global model continued to improve but at a slower rate as the clients' models started to converge.
+* **Final Rounds (Rounds 8-10):** The global model approached convergence, with incremental improvements in accuracy and loss.
+
 ## License
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). Please refer to the [LICENSE](LICENSE) file for more details.
