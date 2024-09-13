@@ -8,7 +8,7 @@ This repository implements a Federated Learning pipeline using Flower and PyTorc
     <tr>
       <td valign=top style="border: 1.2px solid #c6c6c6 !important; padding: 2px !important;">
         <div align=center valign=top>
-          <img src="https://raw.githubusercontent.com/NaderNemati/Federated-Learning-Pipeline/main/federated-learning-pipeline.png" alt="Project Structure" style="margin: 0px !important; height: 200px !important;">
+          <img src="https://raw.githubusercontent.com/NaderNemati/Federated-Learning-Pipeline/main/images/federated-learning-pipeline.png" alt="Project Structure" style="margin: 0px !important; height: 200px !important;">
         </div>
       </td>
     </tr>
