@@ -2,17 +2,19 @@
 Federated Learning pipeline using Flower and PyTorch
 
 
-Federated-Learning-Pipeline/
-│
-├── client.py         # Client-side code for federated learning
-├── dataset.py        # Dataset loading and partitioning
-├── main.py           # Main entry point for running the federated learning simulation
-├── model.py          # Model definition (CNN for MNIST)
-├── server.py         # Server-side federated learning configuration
-├── requirements.txt  # Dependencies to run the code
-├── README.md         # Documentation for the project
-├── LICENSE           # License file
-└── conf/             # Configuration files for the simulation (base.yaml)
+## Project Structure
+
+The project is organized into the following directories:
+
+- **client.py:** Handles local training on MNIST data partitions for each client.
+- **dataset.py:** Partitions the MNIST dataset among clients.
+- **main.py:** Orchestrates the federated learning simulation using Flower.
+- **model.py:** Defines the CNN model for image classification.
+- **server.py:** Defines server-side configurations for federated learning rounds.
+- **conf/base.yaml:** Contains configuration options for the simulation (default configuration file).
+- **requirements.txt:** Lists the required dependencies for the project.
+- **README.md:** Provides documentation for the project (you're currently reading it!).
+- **LICENSE:** Specifies the project's licensing information.
 
 
 
