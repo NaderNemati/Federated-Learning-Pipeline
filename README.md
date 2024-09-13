@@ -110,7 +110,9 @@ This command orchestrates the federated learning process by:
 
 You can modify the federated learning simulation parameters by editing the conf/base.yaml file.
 
-# Example base.yaml content
+### Example for base.yaml content
+
+```python
 num_rounds: 5
 num_clients: 5
 batch_size: 20
@@ -121,3 +123,4 @@ config_fit:
   lr: 0.01
   momentum: 0.9
   local_epochs: 1
+```
