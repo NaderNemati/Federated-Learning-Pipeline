@@ -102,3 +102,22 @@ This command orchestrates the federated learning process by:
 * Loading and partitioning the MNIST dataset using dataset.py
 * Running the federated simulation with client-side logic in client.py and server-side logic in server.py
 * Training a CNN model defined in model.py on the partitioned dataset.
+
+
+
+
+## Configuration
+
+You can modify the federated learning simulation parameters by editing the conf/base.yaml file.
+
+# Example base.yaml content
+num_rounds: 5
+num_clients: 5
+batch_size: 20
+num_classes: 10
+num_clients_per_round_fit: 3
+num_clients_per_round_eval: 2
+config_fit: 
+  lr: 0.01
+  momentum: 0.9
+  local_epochs: 1
