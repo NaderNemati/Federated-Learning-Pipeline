@@ -16,7 +16,7 @@ Federated Learning pipeline using Flower and PyTorch.
   </table>
 </div>
 
-
+```bash
 Federated-Learning-Pipeline/
 ├── client.py         # Client-side code for federated learning
 ├── dataset.py        # Dataset loading and partitioning
@@ -27,7 +27,7 @@ Federated-Learning-Pipeline/
 ├── README.md         # Documentation for the project
 ├── LICENSE           # License file
 └── conf/             # Configuration files for the simulation (base.yaml)
-
+```bash
 
 ## Federated Learning Pipeline on MNIST Dataset
 
