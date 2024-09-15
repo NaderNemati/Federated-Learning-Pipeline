@@ -1,3 +1,4 @@
+flwr==1.11.1
 flwr[simulation]
 fsspec==2024.9.0
 grpcio==1.66.1
