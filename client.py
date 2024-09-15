@@ -1,65 +1,84 @@
+from asyncio.log import logger
 from collections import OrderedDict
 import torch
 import flwr as fl
 from typing import Dict, Any
 from flwr.common import NDArrays, Scalar, Context
-from model import Net, train, test
+from model import MNISTNet, CIFAR10Net, train, test
+import logging  # Add logging
 
 class FlowerClient(fl.client.NumPyClient):
-    def __init__(self,
-                 trainloader,
-                 valloader,
-                 num_classes) -> None:
+    def __init__(self, trainloader, valloader, num_classes, dataset_choice, client_id) -> None:
         super().__init__()
         self.trainloader = trainloader
         self.valloader = valloader
-        self.model = Net(num_classes)
+        self.dataset_choice = dataset_choice
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        self.client_id = client_id
+
+        if self.dataset_choice == "mnist":
+            self.model = MNISTNet(num_classes=num_classes)
+        else:
+            self.model = CIFAR10Net(num_classes=num_classes)
+        
+        self.model.to(self.device)
 
     def set_parameters(self, parameters):
-        params_dict = zip(self.model.state_dict().keys(), parameters)
-        state_dict = OrderedDict({k: torch.Tensor(v) for k, v in params_dict})
-        self.model.load_state_dict(state_dict, strict=True)
+        state_dict = self.model.state_dict()
+        for i, (key, param) in enumerate(state_dict.items()):
+            if i < len(parameters):  
+                param.data = torch.tensor(parameters[i]).data
+            else:
+                logging.info(f"Skipping parameter {key} due to size mismatch.")
+        self.model.load_state_dict(state_dict, strict=False)
 
     def get_parameters(self, config: Dict[str, Scalar]):
         return [val.cpu().numpy() for _, val in self.model.state_dict().items()]
 
     def fit(self, parameters, config):
-        # Copy parameters sent by the server into the client's local model
         self.set_parameters(parameters)
-
         lr = config.get('lr', 0.001)
-        momentum = config.get('momentum', 0.9)
-        optim = torch.optim.SGD(self.model.parameters(), lr=lr, momentum=momentum)
-        epochs = config.get('local_epochs', 1)
-        # Perform local training
-        train(self.model, self.trainloader, optim, epochs, self.device)
+        weight_decay = config.get('weight_decay', 1e-4)
 
-        return self.get_parameters({}), len(self.trainloader), {}
+        # Use AdamW optimizer for training
+        optimizer = torch.optim.AdamW(self.model.parameters(), lr=lr, weight_decay=weight_decay)
+
+        epochs = config.get('local_epochs', 1)
+
+        # Train the model and capture the loss and accuracy
+        train_loss, train_accuracy = train(self.model, self.trainloader, optimizer, epochs, self.device)
+
+        # Return the parameters, length of the training data, and the metrics (including loss and accuracy)
+        return self.get_parameters({}), len(self.trainloader), {"loss": train_loss, "accuracy": train_accuracy}
+
+
+    
 
     def evaluate(self, parameters: NDArrays, config: Dict[str, Scalar]):
         self.set_parameters(parameters)
-        print("Evaluating on validation set...")
-        loss, accuracy = test(self.model, self.valloader, self.device)
-        print(f"Evaluation results: Loss = {loss}, Accuracy = {accuracy}")
-        return float(loss), len(self.valloader), {"accuracy": accuracy}
+
+        client_id = config.get('client_id', 'unknown')
+
+        # Evaluate the model
+        eval_loss, eval_accuracy = test(self.model, self.valloader, self.device)
+
+        # Log client-specific evaluation results
+        logger.info(f"Client {client_id} evaluation results: Loss = {eval_loss:.4f}, Accuracy = {eval_accuracy:.4f}")
+
+        # Return the loss and accuracy
+        return float(eval_loss), len(self.valloader), {"loss": eval_loss, "accuracy": eval_accuracy}
 
 
-
-def generate_client_fn(trainloaders, valloaders, num_classes):
-    def client_fn(context):
-        node_id = context.node_id
-        print(f"Using node_id: {node_id} as client identifier")
-
-        # Use the node_id to select the appropriate client
-        cid = int(node_id) % len(trainloaders)
-
-        # Return a Client instance by calling `to_client()`
+# Function to generate clients
+def generate_client_fn(trainloaders, valloaders, num_classes, dataset_choice):
+    def client_fn(context: Context):
+        cid = int(context.node_id) % len(trainloaders)
+        logging.info(f"Initializing client {cid}")
         return FlowerClient(
             trainloader=trainloaders[cid],
             valloader=valloaders[cid],
-            num_classes=num_classes
-        ).to_client()  # Ensure the client is returned as `Client`, not `NumPyClient`
-
+            num_classes=num_classes,
+            dataset_choice=dataset_choice,
+            client_id=cid
+        ).to_client()
     return client_fn
-
