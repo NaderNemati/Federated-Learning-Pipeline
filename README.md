@@ -54,7 +54,37 @@ The project supports both MNIST and CIFAR10 datasets, with models that are tailo
 
 **MNISTNet:** A relatively simple model with two convolutional layers, suited for MNIST's grayscale images. It efficiently handles the lower complexity of MNIST data, which            has a single color channel.
 
+| Layer Type           | Input Shape       | Output Shape        | Kernel Size | Stride | Padding | Additional Info                  |
+|----------------------|-------------------|---------------------|-------------|--------|---------|----------------------------------|
+| Conv2D               | (1, 28, 28)       | (32, 24, 24)        | 5x5         | 1      | 0       | 1 input channel (grayscale)      |
+| MaxPool2D            | (32, 24, 24)      | (32, 12, 12)        | 2x2         | 2      | 0       | Pooling layer                    |
+| Conv2D               | (32, 12, 12)      | (64, 8, 8)          | 5x5         | 1      | 0       |                                  |
+| MaxPool2D            | (64, 8, 8)        | (64, 4, 4)          | 2x2         | 2      | 0       | Pooling layer                    |
+| Flatten              | (64, 4, 4)        | (1024)              | N/A         | N/A    | N/A     | Converts 2D to 1D                |
+| Fully Connected (FC) | (1024)            | (120)               | N/A         | N/A    | N/A     | Fully connected layer            |
+| Fully Connected (FC) | (120)             | (84)                | N/A         | N/A    | N/A     | Fully connected layer            |
+| Fully Connected (FC) | (84)              | (10)                | N/A         | N/A    | N/A     | Output layer (10 classes)        |
+
+
 **CIFAR10Net:** A more complex model designed for RGB images in CIFAR10. It features deeper layers, batch normalization, and dropout to handle the higher complexity and                     variability of CIFAR10 data. Additionally, gradient clipping is used to prevent exploding gradients during training, a critical feature for more complex datasets like                    CIFAR10.
+
+| Layer Type           | Input Shape       | Output Shape        | Kernel Size | Stride | Padding | Additional Info                  |
+|----------------------|-------------------|---------------------|-------------|--------|---------|----------------------------------|
+| Conv2D               | (3, 32, 32)       | (64, 32, 32)        | 3x3         | 1      | 1       | 3 input channels (RGB)           |
+| BatchNorm2D          | (64, 32, 32)      | (64, 32, 32)        | N/A         | N/A    | N/A     | Batch normalization for stability|
+| MaxPool2D            | (64, 32, 32)      | (64, 16, 16)        | 2x2         | 2      | 0       | Pooling layer                    |
+| Conv2D               | (64, 16, 16)      | (128, 16, 16)       | 3x3         | 1      | 1       |                                  |
+| BatchNorm2D          | (128, 16, 16)     | (128, 16, 16)       | N/A         | N/A    | N/A     | Batch normalization for stability|
+| MaxPool2D            | (128, 16, 16)     | (128, 8, 8)         | 2x2         | 2      | 0       | Pooling layer                    |
+| Conv2D               | (128, 8, 8)       | (256, 8, 8)         | 3x3         | 1      | 1       |                                  |
+| BatchNorm2D          | (256, 8, 8)       | (256, 8, 8)         | N/A         | N/A    | N/A     | Batch normalization for stability|
+| MaxPool2D            | (256, 8, 8)       | (256, 4, 4)         | 2x2         | 2      | 0       | Pooling layer                    |
+| Flatten              | (256, 4, 4)       | (4096)              | N/A         | N/A    | N/A     | Converts 2D to 1D                |
+| Fully Connected (FC) | (4096)            | (512)               | N/A         | N/A    | N/A     | Fully connected layer            |
+| Dropout (0.5)        | (512)             | (512)               | N/A         | N/A    | N/A     | Dropout to prevent overfitting   |
+| Fully Connected (FC) | (512)             | (256)               | N/A         | N/A    | N/A     | Fully connected layer            |
+| Fully Connected (FC) | (256)             | (10)                | N/A         | N/A    | N/A     | Output layer (10 classes)        |
+
 
 **4-Modular and Configurable:**
 
