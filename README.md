@@ -24,6 +24,7 @@ This repository implements a Federated Learning pipeline using the Flower framew
 ## Table of Contents
 
 - [Project Overview](#Project_Overview)
+- [Resource Management for CPU and GPU Allocation](Resource_Management_for_CPU_and_GPU_Allocation)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Modular and Configurable](#Modular_and_Configurable)
@@ -52,7 +53,7 @@ Data is split IID (Independent and Identically Distributed) among clients, meani
 
 The project supports both MNIST and CIFAR10 datasets, with models that are tailored to the complexity of each dataset:
 
-**MNISTNet:** A relatively simple model with two convolutional layers, suited for MNIST's grayscale images. It efficiently handles the lower complexity of MNIST data, which            has a single color channel.
+**MNISTNet:** A relatively simple model with two convolutional layers suited for MNIST's grayscale images. It efficiently handles the lower complexity of MNIST data, which            has a single color channel.
 
 | Layer Type           | Input Shape       | Output Shape        | Kernel Size | Stride | Padding | Additional Info                  |
 |----------------------|-------------------|---------------------|-------------|--------|---------|----------------------------------|
@@ -149,6 +150,13 @@ config_fit:
 ```
 By adjusting parameters like *num_rounds*, *num_clients*, *batch_size*, and *learning rate*, you can tailor the simulation to your specific requirements. This file is crucial for controlling how the federated learning process operates, making it flexible and adaptable to different experiments.
 
+## Resource Management for CPU and GPU Allocation
+
+In the **main.py** script, resource management is configured to ensure the efficient use of both **CPU** and **GPU** resources per client. Specifically, the script defines how many CPUs and GPUs are allocated for each client during the federated learning process using the Flower framework. For example, the following line specifies that each client will use 1 CPU and 0 GPUs for the simulation. This means that clients will only run on the CPU unless the num_gpus value is changed. The script dynamically sets the number of resources available to each client, ensuring that the learning tasks are distributed effectively across the available computational resources.
+
+``` bash
+client_resources={'num_cpus': 1, 'num_gpus': 0.0}
+```
 
 ## Installation
 
