@@ -31,6 +31,8 @@ This repository implements a Federated Learning pipeline using the Flower framew
 - [Performance Summary and Analysis](#Performance-Summary-and-Analysis)
 - [License](#license)
 
+
+
 ## Project Overview
 
 This project implements a Federated Learning (FL) pipeline using the Flower framework and PyTorch for image classification on the MNIST and CIFAR10 datasets. By using the pipeline, multiple clients can collaborate on training a global model while maintaining privacy. Clients share updated models instead of raw data, which are aggregated by a central server using Federated Averaging (FedAvg). The decentralized training approach is ideal for scenarios where data privacy is critical, such as healthcare and finance.
@@ -91,7 +93,7 @@ Defines the central server's responsibilities in aggregating model updates from 
 
 The entry point for running the federated learning simulation. This script sets up the clients, dataset, and training strategy, and coordinates multiple rounds of communication between clients and the server, ensuring that results are logged after each round.
 
-###### Configuration via base.yaml
+###### Configuration via base.yaml:
 
 The 'conf/base.yaml' file contains essential configurations for the federated learning pipeline. 
 It allows you to easily modify important parameters before running the simulation, such as:
@@ -117,7 +119,6 @@ config_fit:
 By adjusting parameters like *num_rounds*, *num_clients*, *batch_size*, and *learning rate*, you can tailor the simulation to your specific requirements. This file is crucial for controlling how the federated learning process operates, making it flexible and adaptable to different experiments.
 
 
-
 ## Installation
 
 ### Prerequisites
@@ -133,7 +134,6 @@ You can install the required dependencies by running the following command:
 ```bash
 pip install -r requirements.txt
 ```
-
 
 ## Usage
 ### Running the Federated Learning Simulation
@@ -162,91 +162,39 @@ This command orchestrates the federated learning process by:
 * Running the federated simulation with client-side logic in client.py and server-side logic in server.py
 * Training a CNN model defined in model.py on the partitioned dataset.
 
-## Pipeline Components:
 
-```python
-Federated-Learning-Pipeline/
-  ├── client.py        # Client-side code for federated learning with Flower
-  ├── dataset.py       # Dataset loading, partitioning, and distribution
-  ├── main.py          # Main entry point for running the simulation
-  ├── model.py         # Model definition (CNN for MNIST)
-  ├── server.py        # Server-side federated learning configuration
-  ├── requirements.txt # Dependencies to run the code
-  ├── README.md        # Project documentation (you're here!)
-  ├── LICENSE          # License file
-  └── conf/            # Configuration files for the simulation (base.yaml)
-    └── base.yaml
-```
 
-### Dataset Preparation (dataset.py):
 
-This script loads and partitions the MNIST and CIFAR10 datasets, applying transformations like normalization and ensuring that data is split among clients. Each client trains its model on its data without sharing it, adhering to federated learning principles.
-
-### Model Definition (model.py):
-
-Defines flexible model architectures for MNIST and CIFAR10. Based on the selected dataset, an appropriate model is dynamically initialized. This script also handles optimization, loss calculation, and evaluation, enabling seamless switching between datasets and models.
-
-### Client Setup (client.py):
-
-Manages local training and evaluation on each client through the FlowerClient class. Each client is dynamically initialized, trains on its partitioned data, and incorporates Differential Privacy (DP) to protect data by adding noise to updates before they are sent to the server.
-
-### Server-Side Operations (server.py):
-
-Defines the central server's responsibilities in aggregating model updates from clients using Secure Aggregation, which ensures that sensitive client information remains private. The server also coordinates training sessions and aggregates parameters and evaluation metrics from clients.
-
-### Federated Learning Orchestration (main.py):
-
-The entry point for running the federated learning simulation. This script sets up the clients, dataset, and training strategy, and coordinates multiple rounds of communication between clients and the server, ensuring that results are logged after each round.
-
-### Configuration via base.yaml
-
-The 'conf/base.yaml' file contains essential configurations for the federated learning pipeline. 
-It allows you to easily modify important parameters before running the simulation, such as:
-
-```python
-num_rounds: 2                  # Number of communication rounds between clients and the server
-num_clients: 5                 # Total number of clients
-batch_size: 32                 # Batch size for local training
-num_classes: 10                # Number of output classes (e.g., for MNIST or CIFAR10)
-num_clients_per_round_fit: 5   # Number of clients participating in training per round
-num_clients_per_round_eval: 5  # Number of clients participating in evaluation per round
-config_fit: 
-      lr: 0.001                # Learning rate for local training
-      weight_decay: 1e-4       # Weight decay to avoid overfitting
-      momentum: 0.9            # Momentum for optimization
-      local_epochs: 2          # Number of local training epochs per client
-dp:
-      epsilon: 1.0             # Privacy budget for Differential Privacy
-      delta: 1e-5              # Privacy parameter controlling the risk of leakage
-      noise_scale: 0.01        # Amount of noise added to model updates for DP
-
-```
-By adjusting parameters like *num_rounds*, *num_clients*, *batch_size*, and *learning rate*, you can tailor the simulation to your specific requirements. This file is crucial for controlling how the federated learning process operates, making it flexible and adaptable to different experiments.
 
 
 ## Performance Summary and Analysis
-In this federated learning experiment, the training and evaluation processes were distributed across 5 clients, each holding a partition of the MNIST dataset. The global model was updated through an aggregation of the models trained locally by the clients. Below is a detailed analysis of the client's performance and the overall learning process:
+This section highlights the performance, productivity, and functionality of the Federated Learning (FL) model for both the MNIST and CIFAR10 datasets after two communication rounds.
 
-#### Clients' Loss and Accuracy
-* Clients exhibited varying performance due to differences in their local data partitions.
-* At the beginning of the training process (Round 1), the loss values across the clients were relatively high, and accuracy ranged between 75-82%.
-* As training progressed, clients steadily improved in both loss and accuracy. For instance, by Round 5, client accuracies reached about 95-96%.
-* By Round 10, clients achieved accuracies between 96.5% and 97.5%, with losses as low as 4.6-5.8.
+**MNIST Dataset:**
 
-#### Global Model Performance
-* The global model initially showed poor performance, with low accuracy (around 75%) and high loss.
-* By Round 5, the global model's accuracy improved to 96.6%, with a loss of 6.85.
-* By Round 10, the global model achieved an accuracy of 97.5%, and the loss decreased to 4.65.
+Performance: The model quickly converges on the MNIST dataset, achieving nearly 99% accuracy in just two rounds. The architecture is well-suited to handle MNIST's low complexity, with both distributed and centralized evaluations showing strong results after minimal training.
+Efficiency: The FL model demonstrates high efficiency, reaching near-perfect accuracy with only two rounds of communication, proving the model's suitability for simpler datasets.
 
-#### Comparison of Clients and Global Model Performance
-* Clients generally outperformed the global model in accuracy, as they optimized for their specific local data.
-* The global model, however, was more generalized, performing well across all clients and unseen data.
-* The global model showed slower but more consistent improvements compared to individual clients.
+**CIFAR10 Dataset:**
+
+Performance: The FL model struggles with CIFAR10’s complexity, achieving only 45% accuracy after two rounds. This indicates that the current model architecture and training strategy are insufficient for handling more complex datasets.
+Efficiency: The federated setup is less efficient for CIFAR10. It requires further optimization, such as more rounds, data augmentation, or deeper models, to reach competitive accuracy.
+
+| **Metric**                        | **MNIST (Round 0)** | **MNIST (Round 1)** | **MNIST (Round 2)** | **CIFAR10 (Round 0)** | **CIFAR10 (Round 1)** | **CIFAR10 (Round 2)** |
+|------------------------------------|---------------------|---------------------|---------------------|-----------------------|-----------------------|-----------------------|
+| **Initial Loss (Centralized)**     | 181.82              | 28.25               | 2.72                | 181.98                | 180.88                | 125.42                |
+| **Initial Accuracy (Centralized)** | 8.72%               | 96.69%              | 98.96%              | 9.87%                 | 12.40%                | 45.48%                |
+| **Distributed Loss**               | N/A                 | 14.07               | 1.52                | N/A                   | 73.41                 | 52.62                 |
+| **Distributed Accuracy**           | N/A                 | 96.20%              | 98.58%              | N/A                   | 11.34%                | 43.70%                |
+
+
+
+
 
 #### Learning Process of the Global Model
 * **Initial Stages (Rounds 1-3):** The global model made rapid progress in reducing loss and improving accuracy, as it learned from the distributed data across the clients.
 * **Mid-Training (Rounds 4-7):** The global model continued to improve but at a slower rate as the clients' models started to converge.
-* **Final Rounds (Rounds 8-10):** The global model approached convergence, with incremental improvements in accuracy and loss.
+* **Final Rounds (Rounds 8-10):** The global model approached convergence with incremental improvements in accuracy and loss.
 
 ## License
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). Please refer to the [LICENSE](LICENSE) file for more details.
