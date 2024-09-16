@@ -53,25 +53,68 @@ This project implements a Federated Learning (FL) pipeline using the Flower fram
               **MNISTNet:* A relatively simple model with two convolutional layers, suited for MNIST's grayscale images. It efficiently handles the lower complexity of MNIST data, which                 has a single color channel.
               **CIFAR10Net:* A more complex model designed for RGB images in CIFAR10. It features deeper layers, batch normalization, and dropout to handle the higher complexity and                     variability of CIFAR10 data. Additionally, gradient clipping is used to prevent exploding gradients during training, a critical feature for more complex datasets like                    CIFAR10.
 
+**4-Modular and Configurable:**
 
+The project is structured into clean, modular components:
 
+```python
+Federated-Learning-Pipeline/
+  ├── client.py        # Client-side code for federated learning with Flower
+  ├── dataset.py       # Dataset loading, partitioning, and distribution
+  ├── main.py          # Main entry point for running the simulation
+  ├── model.py         # Model definition (CNN for MNIST)
+  ├── server.py        # Server-side federated learning configuration
+  ├── requirements.txt # Dependencies to run the code
+  ├── README.md        # Project documentation (you're here!)
+  ├── LICENSE          # License file
+  └── conf/            # Configuration files for the simulation (base.yaml)
+    └── base.yaml
+```
 
+###### Dataset Preparation (dataset.py):
 
+This script loads and partitions the MNIST and CIFAR10 datasets, applying transformations like normalization and ensuring that data is split among clients. Each client trains its model on its data without sharing it, adhering to federated learning principles.
 
+###### Model Definition (model.py):
 
+Defines flexible model architectures for MNIST and CIFAR10. Based on the selected dataset, an appropriate model is dynamically initialized. This script also handles optimization, loss calculation, and evaluation, enabling seamless switching between datasets and models.
 
-This project implements a simple Federated Learning pipeline for image classification using the MNIST dataset. The pipeline includes:
+###### Client Setup (client.py):
 
-* **Client-side functionality:**
-    * `client.py`: Defines the Flower client to handle local training on partitioned MNIST data for each client.
-* **Server-side configuration:**
-    * `server.py`: Defines server-side configurations for managing communication rounds, model aggregation, and global model updates.
-* **Data handling:**
-    * `dataset.py`: Handles loading the MNIST dataset, strategically partitioning it among clients (e.g., IID or non-IID), and ensures no raw data is exchanged.
-* **Model definition:**
-    * `model.py`: Defines a simple Convolutional Neural Network (CNN) model for image classification.
-* **Simulation orchestration:**
-    * `main.py`: Orchestrates the federated learning simulation using Flower, coordinating communication between clients and the server.
+Manages local training and evaluation on each client through the FlowerClient class. Each client is dynamically initialized, trains on its partitioned data, and incorporates Differential Privacy (DP) to protect data by adding noise to updates before they are sent to the server.
+
+###### Server-Side Operations (server.py):
+
+Defines the central server's responsibilities in aggregating model updates from clients using Secure Aggregation, which ensures that sensitive client information remains private. The server also coordinates training sessions and aggregates parameters and evaluation metrics from clients.
+
+###### Federated Learning Orchestration (main.py):
+
+The entry point for running the federated learning simulation. This script sets up the clients, dataset, and training strategy, and coordinates multiple rounds of communication between clients and the server, ensuring that results are logged after each round.
+
+###### Configuration via base.yaml
+
+The 'conf/base.yaml' file contains essential configurations for the federated learning pipeline. 
+It allows you to easily modify important parameters before running the simulation, such as:
+
+```python
+num_rounds: 2                  # Number of communication rounds between clients and the server
+num_clients: 5                 # Total number of clients
+batch_size: 32                 # Batch size for local training
+num_classes: 10                # Number of output classes (e.g., for MNIST or CIFAR10)
+num_clients_per_round_fit: 5   # Number of clients participating in training per round
+num_clients_per_round_eval: 5  # Number of clients participating in evaluation per round
+config_fit: 
+      lr: 0.001                # Learning rate for local training
+      weight_decay: 1e-4       # Weight decay to avoid overfitting
+      momentum: 0.9            # Momentum for optimization
+      local_epochs: 2          # Number of local training epochs per client
+      dp:
+      epsilon: 1.0             # Privacy budget for Differential Privacy
+      delta: 1e-5              # Privacy parameter controlling the risk of leakage
+      noise_scale: 0.01        # Amount of noise added to model updates for DP
+
+```
+By adjusting parameters like *num_rounds*, *num_clients*, *batch_size*, and *learning rate*, you can tailor the simulation to your specific requirements. This file is crucial for controlling how the federated learning process operates, making it flexible and adaptable to different experiments.
 
 
 
