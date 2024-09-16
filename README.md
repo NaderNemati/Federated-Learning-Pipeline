@@ -114,11 +114,11 @@ Defines flexible model architectures for MNIST and CIFAR10. Based on the selecte
 
 ###### Client Setup (client.py):
 
-Manages local training and evaluation on each client through the FlowerClient class. Each client is dynamically initialized, trains on its partitioned data, and incorporates Differential Privacy (DP) to protect data by adding noise to updates before they are sent to the server.
+Manages local training and evaluation on each client through the FlowerClient class. Each client is dynamically initialized, trains on its partitioned data, and incorporates Differential Privacy (DP) [Abadi et al. (2016). "Deep Learning with Differential Privacy"](https://dl.acm.org/doi/10.1145/2976749.2978318) to protect data by adding noise to updates before they are sent to the server.
 
 ###### Server-Side Operations (server.py):
 
-Defines the central server's responsibilities in aggregating model updates from clients using Secure Aggregation, which ensures that sensitive client information remains private. The server also coordinates training sessions and aggregates parameters and evaluation metrics from clients.
+Defines the central server's responsibilities in aggregating model updates from clients using Secure Aggregation [Bonawitz et al. (2017). "Practical Secure Aggregation for Privacy-Preserving Machine Learning"](https://dl.acm.org/doi/10.1145/3133956.3133982), which ensures that sensitive client information remains private. The server also coordinates training sessions and aggregates parameters and evaluation metrics from clients.
 
 ###### Federated Learning Orchestration (main.py):
 
