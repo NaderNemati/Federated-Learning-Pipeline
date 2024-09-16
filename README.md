@@ -10,7 +10,7 @@
   </table>
 </div>
 
-##### Notice!
+### Notice!
 
 The **Federated_Learning_Pipeline.ipynb** notebook, which is the Google Colab implementation of the project, is available in the repository to provide easier access and a cloud-based environment for running the Federated Learning pipeline without requiring local setup.
 
