@@ -23,12 +23,11 @@ This repository implements a Federated Learning pipeline using the Flower framew
 
 ## Table of Contents
 
-- [Overview](#overview)
+- [Project Overview](#Project_Overview)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Pipeline Components](#Pipeline_Components)
-- [Configuration](#Configuration)
-- [Performance Summary and Analysis](#Performance-Summary-and-Analysis)
+- [Modular and Configurable](#Modular_and_Configurable)
+- [Performance Summary and Analysis](#Performance_Summary_and_Analysis)
 - [License](#license)
 
 
@@ -162,12 +161,8 @@ This command orchestrates the federated learning process by:
 * Running the federated simulation with client-side logic in client.py and server-side logic in server.py
 * Training a CNN model defined in model.py on the partitioned dataset.
 
-
-
-
-
-
 ## Performance Summary and Analysis
+
 This section highlights the performance, productivity, and functionality of the Federated Learning (FL) model for both the MNIST and CIFAR10 datasets after two communication rounds.
 
 **MNIST Dataset:**
@@ -187,14 +182,6 @@ Efficiency: The federated setup is less efficient for CIFAR10. It requires furth
 | **Distributed Loss**               | N/A                 | 14.07               | 1.52                | N/A                   | 73.41                 | 52.62                 |
 | **Distributed Accuracy**           | N/A                 | 96.20%              | 98.58%              | N/A                   | 11.34%                | 43.70%                |
 
-
-
-
-
-#### Learning Process of the Global Model
-* **Initial Stages (Rounds 1-3):** The global model made rapid progress in reducing loss and improving accuracy, as it learned from the distributed data across the clients.
-* **Mid-Training (Rounds 4-7):** The global model continued to improve but at a slower rate as the clients' models started to converge.
-* **Final Rounds (Rounds 8-10):** The global model approached convergence with incremental improvements in accuracy and loss.
 
 ## License
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). Please refer to the [LICENSE](LICENSE) file for more details.
