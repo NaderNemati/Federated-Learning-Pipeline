@@ -107,33 +107,48 @@ This command orchestrates the federated learning process by:
 * Running the federated simulation with client-side logic in client.py and server-side logic in server.py
 * Training a CNN model defined in model.py on the partitioned dataset.
 
+## Pipeline Components:
+### Dataset Preparation (dataset.py):
 
+This script loads and partitions the MNIST and CIFAR10 datasets, applying transformations like normalization and ensuring that data is split among clients. Each client trains its model on its data without sharing it, adhering to federated learning principles.
 
+### Model Definition (model.py):
 
-## Configuration
+Defines flexible model architectures for MNIST and CIFAR10. Based on the selected dataset, an appropriate model is dynamically initialized. This script also handles optimization, loss calculation, and evaluation, enabling seamless switching between datasets and models.
 
-You can modify the federated learning simulation parameters by editing the conf/base.yaml file.
+### Client Setup (client.py):
 
-### Example for base.yaml content
+Manages local training and evaluation on each client through the FlowerClient class. Each client is dynamically initialized, trains on its partitioned data, and incorporates Differential Privacy (DP) to protect data by adding noise to updates before they are sent to the server.
+
+### Server-Side Operations (server.py):
+
+Defines the central server's responsibilities in aggregating model updates from clients using Secure Aggregation, which ensures that sensitive client information remains private. The server also coordinates training sessions and aggregates parameters and evaluation metrics from clients.
+
+### Federated Learning Orchestration (main.py):
+
+The entry point for running the federated learning simulation. This script sets up the clients, dataset, and training strategy, and coordinates multiple rounds of communication between clients and the server, ensuring that results are logged after each round.
+
+### Configuration via base.yaml
+
+The 'conf/base.yaml' file contains essential configurations for the federated learning pipeline. 
+It allows you to easily modify important parameters before running the simulation, such as:
 
 ```python
-num_rounds: 2        # Number of communication rounds between clients and the server
-num_clients: 5       # Total number of clients
-batch_size: 32       # Batch size for local training
-num_classes: 10      # Number of output classes (e.g., for MNIST or CIFAR10)
-num_clients_per_round_fit: 5  # Number of clients participating in training per round
-num_clients_per_round_eval: 5 # Number of clients participating in evaluation per round
-
+num_rounds: 2                  # Number of communication rounds between clients and the server
+num_clients: 5                 # Total number of clients
+batch_size: 32                 # Batch size for local training
+num_classes: 10                # Number of output classes (e.g., for MNIST or CIFAR10)
+num_clients_per_round_fit: 5   # Number of clients participating in training per round
+num_clients_per_round_eval: 5  # Number of clients participating in evaluation per round
 config_fit: 
-  lr: 0.001           # Learning rate for local training
-  weight_decay: 1e-4  # Weight decay to avoid overfitting
-  momentum: 0.9       # Momentum for optimization
-  local_epochs: 2     # Number of local training epochs per client
-
+      lr: 0.001                # Learning rate for local training
+      weight_decay: 1e-4       # Weight decay to avoid overfitting
+      momentum: 0.9            # Momentum for optimization
+      local_epochs: 2          # Number of local training epochs per client
 dp:
-  epsilon: 1.0        # Privacy budget for Differential Privacy
-  delta: 1e-5         # Privacy parameter controlling risk of leakage
-  noise_scale: 0.01   # Amount of noise added to model updates for DP
+      epsilon: 1.0             # Privacy budget for Differential Privacy
+      delta: 1e-5              # Privacy parameter controlling the risk of leakage
+      noise_scale: 0.01        # Amount of noise added to model updates for DP
 
 ```
 
