@@ -27,7 +27,7 @@ This repository implements a Federated Learning pipeline using the Flower framew
 - [Resource Management for CPU and GPU Allocation](Resource_Management_for_CPU_and_GPU_Allocation)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Modular and Configurable](#Modular_and_Configurable)
+- [Modular and Configuration](#Modular_and_Configuration)
 - [Performance Summary and Analysis](#Performance_Summary_and_Analysis)
 - [License](#license)
 
@@ -39,17 +39,17 @@ This project implements a Federated Learning (FL) pipeline using the Flower fram
 
 ### Key Features
 
-**1-Client-Side Training with Privacy Preservation:**
+**1) Client-Side Training with Privacy Preservation:**
 
 Clients train models locally on their data partitions and only send model updates (weights) to the server, ensuring that raw data remains private. 
 Differential Privacy (DP) adds noise to the model updates, protecting sensitive information, while Secure Aggregation ensures that individual updates 
 remain private during the aggregation process.
       
-**2-Training and Validation Strategy:**
+**2) Training and Validation Strategy:**
 
 Data is split IID (Independent and Identically Distributed) among clients, meaning each client’s data is representative of the entire dataset. This method leverages the fact that        both MNIST and CIFAR10 datasets are drawn from a common distribution. Additionally, 10% of each client's data is reserved for local validation, allowing clients to assess their          model's performance during training. After every round of training and aggregation, the global model is evaluated on the full test dataset, ensuring comprehensive performance            analysis.
 
-**3-Dynamic Model Selection:**
+**3) Dynamic Model Selection:**
 
 The project supports both MNIST and CIFAR10 datasets, with models that are tailored to the complexity of each dataset:
 
@@ -87,7 +87,7 @@ The project supports both MNIST and CIFAR10 datasets, with models that are tailo
 | Fully Connected (FC) | (256)             | (10)                | N/A         | N/A    | N/A     | Output layer (10 classes)        |
 
 
-**4-Modular and Configurable:**
+**4) Modular and Configuration:**
 
 The project is structured into clean, modular components:
 
