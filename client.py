@@ -131,7 +131,7 @@ def generate_client_fn(trainloaders, valloaders, num_classes, dataset_choice, ep
     """
     This function generates a unique initialization function for each client, ensuring that it is dynamically generated.
     
-    Args:
+    Arguments:
         trainloaders: List of training DataLoaders
         valloaders: List of validation DataLoaders
         num_classes: Number of output classes for the model
