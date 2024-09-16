@@ -197,27 +197,5 @@ This command orchestrates the federated learning process by:
 
 Alternatively, you can run this project using the provided Google Colab notebook. It allows you to easily run the entire Federated Learning pipeline in the cloud without the need to set up a local environment.
 
-## Performance Summary and Analysis
-
-This section highlights the performance, productivity, and functionality of the Federated Learning (FL) model for both the MNIST and CIFAR10 datasets after two communication rounds.
-
-**MNIST Dataset:**
-
-Performance: The model quickly converges on the MNIST dataset, achieving nearly 99% accuracy in just two rounds. The architecture is well-suited to handle MNIST's low complexity, with both distributed and centralized evaluations showing strong results after minimal training.
-Efficiency: The FL model demonstrates high efficiency, reaching near-perfect accuracy with only two rounds of communication, proving the model's suitability for simpler datasets.
-
-**CIFAR10 Dataset:**
-
-Performance: The FL model struggles with CIFAR10’s complexity, achieving only 45% accuracy after two rounds. This indicates that the current model architecture and training strategy are insufficient for handling more complex datasets.
-Efficiency: The federated setup is less efficient for CIFAR10. It requires further optimization, such as more rounds, data augmentation, or deeper models, to reach competitive accuracy.
-
-| **Metric**                        | **MNIST (Round 0)** | **MNIST (Round 1)** | **MNIST (Round 2)** | **CIFAR10 (Round 0)** | **CIFAR10 (Round 1)** | **CIFAR10 (Round 2)** |
-|------------------------------------|---------------------|---------------------|---------------------|-----------------------|-----------------------|-----------------------|
-| **Initial Loss (Centralized)**     | 181.82              | 28.25               | 2.72                | 181.98                | 180.88                | 125.42                |
-| **Initial Accuracy (Centralized)** | 8.72%               | 96.69%              | 98.96%              | 9.87%                 | 12.40%                | 45.48%                |
-| **Distributed Loss**               | N/A                 | 14.07               | 1.52                | N/A                   | 73.41                 | 52.62                 |
-| **Distributed Accuracy**           | N/A                 | 96.20%              | 98.58%              | N/A                   | 11.34%                | 43.70%                |
-
-
 ## License
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). Please refer to the [LICENSE](LICENSE) file for more details.
