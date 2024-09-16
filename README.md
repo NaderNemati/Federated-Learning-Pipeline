@@ -1,19 +1,20 @@
-# Federated-Learning-Pipeline
-
-This repository implements a Federated Learning pipeline using Flower and PyTorch, enabling collaborative training of a model on the MNIST dataset for image classification across multiple clients without sharing raw data.
-
-
 <div align="center">
-  <table border=0 style="border: 1.2px solid #c6c6c6 !important; border-spacing: 2px; width: auto !important;">
+  <table border=0 style="border: 0.2px solid #c6c6c6 !important; border-spacing: 4px; width: auto !important;">
     <tr>
-      <td valign=top style="border: 1.2px solid #c6c6c6 !important; padding: 2px !important;">
+      <td valign=top style="border: 0.2px solid #c6c6c6 !important; padding: 4px !important;">
         <div align=center valign=top>
-          <img src="https://raw.githubusercontent.com/NaderNemati/Federated-Learning-Pipeline/main/images/federated-learning-pipeline.png" alt="Project Structure" style="margin: 0px !important; height: 200px !important;">
+          <img src="https://raw.githubusercontent.com/NaderNemati/Federated-Learning-Pipeline/main/images/federated-learning-pipeline.png" alt="Project Structure" style="margin: 0px !important; height: 400px !important;">
         </div>
       </td>
     </tr>
   </table>
 </div>
+
+
+# Federated-Learning-Pipeline
+
+This repository implements a Federated Learning pipeline using Flower and PyTorch, enabling collaborative training of a model on the MNIST dataset for image classification across multiple clients without sharing raw data.
+
 
 ## Federated Learning Pipeline on MNIST Dataset
 
