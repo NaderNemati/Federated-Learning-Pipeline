@@ -39,19 +39,22 @@ This project implements a Federated Learning (FL) pipeline using the Flower fram
 ### Key Features
 
 **1-Client-Side Training with Privacy Preservation:**
+
 Clients train models locally on their data partitions and only send model updates (weights) to the server, ensuring that raw data remains private. 
 Differential Privacy (DP) adds noise to the model updates, protecting sensitive information, while Secure Aggregation ensures that individual updates 
 remain private during the aggregation process.
       
 **2-Training and Validation Strategy:**
 
-      Data is split IID (Independent and Identically Distributed) among clients, meaning each client’s data is representative of the entire dataset. This method leverages the fact that        both MNIST and CIFAR10 datasets are drawn from a common distribution. Additionally, 10% of each client's data is reserved for local validation, allowing clients to assess their          model's performance during training. After every round of training and aggregation, the global model is evaluated on the full test dataset, ensuring comprehensive performance            analysis.
+Data is split IID (Independent and Identically Distributed) among clients, meaning each client’s data is representative of the entire dataset. This method leverages the fact that        both MNIST and CIFAR10 datasets are drawn from a common distribution. Additionally, 10% of each client's data is reserved for local validation, allowing clients to assess their          model's performance during training. After every round of training and aggregation, the global model is evaluated on the full test dataset, ensuring comprehensive performance            analysis.
 
 **3-Dynamic Model Selection:**
 
-      The project supports both MNIST and CIFAR10 datasets, with models that are tailored to the complexity of each dataset:
-              **MNISTNet:* A relatively simple model with two convolutional layers, suited for MNIST's grayscale images. It efficiently handles the lower complexity of MNIST data, which                 has a single color channel.
-              **CIFAR10Net:* A more complex model designed for RGB images in CIFAR10. It features deeper layers, batch normalization, and dropout to handle the higher complexity and                     variability of CIFAR10 data. Additionally, gradient clipping is used to prevent exploding gradients during training, a critical feature for more complex datasets like                    CIFAR10.
+The project supports both MNIST and CIFAR10 datasets, with models that are tailored to the complexity of each dataset:
+
+**MNISTNet:** A relatively simple model with two convolutional layers, suited for MNIST's grayscale images. It efficiently handles the lower complexity of MNIST data, which            has a single color channel.
+
+**CIFAR10Net:** A more complex model designed for RGB images in CIFAR10. It features deeper layers, batch normalization, and dropout to handle the higher complexity and                     variability of CIFAR10 data. Additionally, gradient clipping is used to prevent exploding gradients during training, a critical feature for more complex datasets like                    CIFAR10.
 
 **4-Modular and Configurable:**
 
