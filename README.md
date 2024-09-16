@@ -119,7 +119,7 @@ Manages local training and evaluation on each client through the FlowerClient cl
 
 ###### Server-Side Operations (server.py):
 
-Defines the central server's responsibilities in aggregating model updates from clients using Secure Aggregation [Bonawitz et al. (2017). "Practical Secure Aggregation for Privacy-Preserving Machine Learning"](https://dl.acm.org/doi/10.1145/3133956.3133982), which ensures that sensitive client information remains private. The server also coordinates training sessions and aggregates parameters and evaluation metrics from clients.
+Defines the central server's responsibilities in aggregating model updates from clients using Secure Aggregation [Bonawitz et al. (2017). "Practical Secure Aggregation for Privacy-Preserving Machine Learning"](https://dl.acm.org/doi/10.1145/3133956.3133982), which ensures that sensitive client information remains private. The server also coordinates training sessions and aggregates parameters and evaluation metrics from clients. Therefore, **SecureAggregationFedAvg** is designed to secure aggregation instead of the default behavior.
 
 ###### Federated Learning Orchestration (main.py):
 
