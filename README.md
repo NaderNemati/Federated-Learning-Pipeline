@@ -39,10 +39,9 @@ This project implements a Federated Learning (FL) pipeline using the Flower fram
 ### Key Features
 
 **1-Client-Side Training with Privacy Preservation:**
-
-      Clients train models locally on their data partitions and only send model updates (weights) to the server, ensuring that raw data remains private. 
-      Differential Privacy (DP) adds noise to the model updates, protecting sensitive information, while Secure Aggregation ensures that individual updates 
-      remain private during the aggregation process.
+Clients train models locally on their data partitions and only send model updates (weights) to the server, ensuring that raw data remains private. 
+Differential Privacy (DP) adds noise to the model updates, protecting sensitive information, while Secure Aggregation ensures that individual updates 
+remain private during the aggregation process.
       
 **2-Training and Validation Strategy:**
 
