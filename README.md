@@ -13,12 +13,13 @@
 
 # Federated-Learning-Pipeline
 
-This repository implements a Federated Learning pipeline using Flower and PyTorch, enabling collaborative training of a model on the MNIST dataset for image classification across multiple clients without sharing raw data.
+Federated Learning (FL) is a distributed machine learning approach that allows multiple clients (such as mobile devices or institutions) to collaboratively train a shared model without sharing raw data. This approach is particularly useful in scenarios where data privacy is crucial, such as in healthcare or finance, where sharing sensitive information is not permissible.
+
+## Federated Learning Pipeline on MNIST and CIFAR10
+
+This repository implements a Federated Learning pipeline using the Flower framework with PyTorch, designed for collaborative training of image classification models on the MNIST and CIFAR10 datasets. The pipeline enables multiple clients to train models on their local data partitions, ensuring privacy by never sharing raw data with a central server. Instead, only model updates (weights) are exchanged, and the central server aggregates these updates using the Federated Averaging (FedAvg) algorithm to update a global model. The global model is then distributed back to clients for further training in subsequent rounds. This decentralized approach is crucial in scenarios where data privacy is a priority, such as healthcare or finance.
 
 
-## Federated Learning Pipeline on MNIST Dataset
-
-This repository implements a Federated Learning pipeline using the Flower framework. Multiple clients collaboratively train a model on the MNIST dataset for image classification, preserving privacy by training on their local data partitions without sharing raw data.  
 
 ## Table of Contents
 
@@ -116,17 +117,31 @@ You can modify the federated learning simulation parameters by editing the conf/
 ### Example for base.yaml content
 
 ```python
-num_rounds: 5
-num_clients: 5
-batch_size: 20
-num_classes: 10
-num_clients_per_round_fit: 3
-num_clients_per_round_eval: 2
+num_rounds: 2        # Number of communication rounds between clients and the server
+num_clients: 5       # Total number of clients
+batch_size: 32       # Batch size for local training
+num_classes: 10      # Number of output classes (e.g., for MNIST or CIFAR10)
+num_clients_per_round_fit: 5  # Number of clients participating in training per round
+num_clients_per_round_eval: 5 # Number of clients participating in evaluation per round
+
 config_fit: 
-  lr: 0.01
-  momentum: 0.9
-  local_epochs: 1
+  lr: 0.001           # Learning rate for local training
+  weight_decay: 1e-4  # Weight decay to avoid overfitting
+  momentum: 0.9       # Momentum for optimization
+  local_epochs: 2     # Number of local training epochs per client
+
+dp:
+  epsilon: 1.0        # Privacy budget for Differential Privacy
+  delta: 1e-5         # Privacy parameter controlling risk of leakage
+  noise_scale: 0.01   # Amount of noise added to model updates for DP
+
 ```
+
+
+
+
+
+
 
 ## Performance Summary and Analysis
 In this federated learning experiment, the training and evaluation processes were distributed across 5 clients, each holding a partition of the MNIST dataset. The global model was updated through an aggregation of the models trained locally by the clients. Below is a detailed analysis of the client's performance and the overall learning process:
