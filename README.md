@@ -13,7 +13,7 @@
 
 # Federated-Learning-Pipeline
 
-Federated Learning (FL) is a distributed machine learning approach that allows multiple clients (such as mobile devices or institutions) to collaboratively train a shared model without sharing raw data. This approach is particularly useful in scenarios where data privacy is crucial, such as in healthcare or finance, where sharing sensitive information is not permissible.
+Federated Learning (FL) is a distributed machine learning approach that allows multiple clients (such as mobile devices or institutions) to collaboratively train a shared model without sharing raw data. This approach is particularly useful in scenarios where data privacy is crucial, such as in healthcare or finance, where sharing sensitive information is not permissible [McMahan et al. (2017). "Communication-Efficient Learning of Deep Networks from Decentralized Data](https://proceedings.mlr.press/v54/mcmahan17a.html).
 
 ## Federated Learning Pipeline on MNIST and CIFAR10
 
