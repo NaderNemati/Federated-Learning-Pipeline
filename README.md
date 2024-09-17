@@ -99,7 +99,7 @@ Federated-Learning-Pipeline/
   ├── client.py        # Client-side code for federated learning with Flower
   ├── dataset.py       # Dataset loading, partitioning, and distribution
   ├── main.py          # Main entry point for running the simulation
-  ├── model.py         # Model definition (CNN for MNIST)
+  ├── model.py         # Model definition (CNN for MNISTand CNN model for CIFA10)
   ├── server.py        # Server-side federated learning configuration
   ├── requirements.txt # Dependencies to run the code
   ├── README.md        # Project documentation (you're here!)
