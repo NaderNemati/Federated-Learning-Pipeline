@@ -32,6 +32,7 @@ This repository implements a Federated Learning pipeline using the Flower framew
 - [Resource Management for CPU and GPU Allocation](Resource_Management_for_CPU_and_GPU_Allocation)
 - [Modular and Configuration](#Modular_and_Configuration)
 - [License](#license)
+- [Summary of Analysis of Model Performance](#Summary_of_Analysis_of_Model_Performance)
 
 
 ## Installation
@@ -209,6 +210,22 @@ In this context, setting num_gpus to a fractional value like 0.2 means multiple 
 ``` bash
 client_resources={'num_cpus': 1, 'num_gpus': 0.2}
 ```
+
+## Summary of Analysis of Model Performance
+
+**MNIST Dataset**
+
+**Initial Results:** The model started with a high loss of 182.12 and a very low accuracy of 8.8%, reflecting untrained initial global parameters.
+Training Rounds: Over 10 rounds, the model showed rapid improvement. By the 1st round, accuracy increased to 96.35%, and by the final round (10th), accuracy reached 99.28%, with the loss decreasing significantly to 2.07.
+
+**Performance Summary:** The model converged quickly with high accuracy, indicating successful training. The use of Differential Privacy (DP) settings was applied without issue, and Secure Aggregation was successfully implemented in each round.
+CIFAR-10 Dataset
+
+**Initial Results:** The initial evaluation showed a loss of 181.94 and a baseline accuracy of 10%, indicating no meaningful classification at the start.
+
+**Training Rounds:** Unlike MNIST, CIFAR-10 training encountered difficulties. While there was some improvement after round 5 (accuracy reaching 61.73%), several rounds produced NaN losses, likely due to numerical instability. By round 10, accuracy improved to 71.82%, but training was not as smooth or stable as MNIST.
+
+**Performance Summary:** The model struggled with CIFAR-10, showing unstable losses and fluctuating accuracy. This indicates that additional tuning (e.g., better model architecture or hyperparameters) is needed for CIFAR-10.
 
 ## License
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). Please refer to the [LICENSE](LICENSE) file for more details.
