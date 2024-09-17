@@ -196,7 +196,7 @@ config_fit:
       noise_scale: 0.01        # Amount of noise added to model updates for DP
 
 ```
-By adjusting parameters like *num_rounds*, *num_clients*, *batch_size*, and *learning rate*, you can tailor the simulation to your specific requirements. This file is crucial for controlling how the federated learning process operates, making it flexible and adaptable to different experiments.
+By adjusting parameters like **num_rounds**, **num_clients**, **batch_size**, and **learning rate**, you can tailor the simulation to your specific requirements. This file is crucial for controlling how the federated learning process operates, making it flexible and adaptable to different experiments.
 
 ## Resource Management for CPU and GPU Allocation
 
