@@ -1,7 +1,7 @@
 <div align="center">
-  <table border=0 style="border: 0.2px solid #c6c6c6 !important; border-spacing: 4px; width: auto !important;">
+  <table border=0 style="border: 0.2px solid #c6c6c6 !important; border-spacing: 1px; width: auto !important;">
     <tr>
-      <td valign=top style="border: 0.2px solid #c6c6c6 !important; padding: 4px !important;">
+      <td valign=top style="border: 0.2px solid #c6c6c6 !important; padding: 1px !important;">
         <div align=center valign=top>
           <img src="https://raw.githubusercontent.com/NaderNemati/Federated-Learning-Pipeline/main/images/federated-learning-pipeline.png" alt="Project Structure" style="margin: 0px !important; height: 400px !important;">
         </div>
