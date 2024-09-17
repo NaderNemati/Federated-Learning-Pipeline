@@ -26,12 +26,11 @@ This repository implements a Federated Learning pipeline using the Flower framew
 
 ## Table of Contents
 
-- [Project Overview](#Project_Overview)
-- [Resource Management for CPU and GPU Allocation](Resource_Management_for_CPU_and_GPU_Allocation)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Project Overview](#Project_Overview)
+- [Resource Management for CPU and GPU Allocation](Resource_Management_for_CPU_and_GPU_Allocation)
 - [Modular and Configuration](#Modular_and_Configuration)
-- [Performance Summary and Analysis](#Performance_Summary_and_Analysis)
 - [License](#license)
 
 
