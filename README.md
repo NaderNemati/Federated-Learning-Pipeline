@@ -204,9 +204,6 @@ This command orchestrates the federated learning process by:
 * Running the federated simulation with client-side logic in client.py and server-side logic in server.py
 * Training a CNN model defined in model.py on the partitioned dataset.
 
-### Google Colab Notebook
-
-Alternatively, you can run this project using the provided Google Colab notebook. It allows you to easily run the entire Federated Learning pipeline in the cloud without the need to set up a local environment.
 
 ## License
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). Please refer to the [LICENSE](LICENSE) file for more details.
