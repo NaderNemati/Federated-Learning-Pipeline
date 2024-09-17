@@ -204,6 +204,11 @@ In the **main.py** script, resource management is configured to ensure the effic
 ``` bash
 client_resources={'num_cpus': 1, 'num_gpus': 0.0}
 ```
+In this context, setting num_gpus to a fractional value like 0.2 means multiple clients will share the GPU, with each client using only a part of the available GPU resources. This is useful in scenarios where the available GPU(s) are limited, but several clients need access to GPU-accelerated training simultaneously.
+
+``` bash
+client_resources={'num_cpus': 1, 'num_gpus': 0.2}
+```
 
 ## License
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). Please refer to the [LICENSE](LICENSE) file for more details.
