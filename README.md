@@ -153,27 +153,27 @@ Federated-Learning-Pipeline/
     └── base.yaml
 ```
 
-###### Dataset Preparation (**dataset.py**):
+#### Dataset Preparation (**dataset.py**):
 
 This script loads and partitions the MNIST and CIFAR10 datasets, applying transformations like normalization and ensuring that data is split among clients. Each client trains its model on its data without sharing it, adhering to federated learning principles.
 
-###### Model Definition (**model.py**):
+#### Model Definition (**model.py**):
 
 Defines flexible model architectures for MNIST and CIFAR10. Based on the selected dataset, an appropriate model is dynamically initialized. This script also handles optimization, loss calculation, and evaluation, enabling seamless switching between datasets and models.
 
-###### Client Setup (**client.py**):
+#### Client Setup (**client.py**):
 
 Manages local training and evaluation on each client through the FlowerClient class. Each client is dynamically initialized, trains on its partitioned data, and incorporates Differential Privacy (DP) [Abadi et al. (2016). "Deep Learning with Differential Privacy"](https://dl.acm.org/doi/10.1145/2976749.2978318) to protect data by adding noise to updates before they are sent to the server.
 
-###### Server-Side Operations (**server.py**):
+#### Server-Side Operations (**server.py**):
 
 Defines the central server's responsibilities in aggregating model updates from clients using Secure Aggregation [Bonawitz et al. (2017). "Practical Secure Aggregation for Privacy-Preserving Machine Learning"](https://dl.acm.org/doi/10.1145/3133956.3133982), which ensures that sensitive client information remains private. The server also coordinates training sessions and aggregates parameters and evaluation metrics from clients. Therefore, **SecureAggregationFedAvg** is designed to secure aggregation instead of the default behavior.
 
-###### Federated Learning Orchestration (**main.py**):
+#### Federated Learning Orchestration (**main.py**):
 
 The entry point for running the federated learning simulation. This script sets up the clients, dataset, and training strategy, and coordinates multiple rounds of communication between clients and the server, ensuring that results are logged after each round.
 
-###### Configuration via **base.yaml**:
+#### Configuration via **base.yaml**:
 
 The 'conf/base.yaml' file contains essential configurations for the federated learning pipeline. 
 It allows you to easily modify important parameters before running the simulation, such as:
